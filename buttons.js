@@ -29,7 +29,7 @@ function help(){
 }
 function helpme(){
     
-    document.getElementById("Answer").innerHTML = boardy.nextMove();
+    alert("Try to click or Flag around  "  + boardy.nextMove() + ". This is not a perfect solver, but it does help!")
     
 
 }

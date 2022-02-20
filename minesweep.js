@@ -47,7 +47,6 @@ function Board(){
         this.squareCount = 81;
         for(let i = 0; i<81; i++){
 
-
             let bomby = getRandomInt(this.squareCount) < this.mineCount;
             if(bomby) {
                 this.mineCount -=1;
@@ -91,9 +90,6 @@ function Board(){
     this.flagSquare = ()=>{
         for(let i = 0; i<81; i++){
             if(graph.mouseOnMine(this.board[i]) && !this.board[i].sweeped){
-                this.board[i].flagged = true;
-                this.board.solverBombCount--;
-                
                 this.board[i].flagged = !this.board[i].flagged;
             }
     }
@@ -101,29 +97,21 @@ function Board(){
 
 }
     this.loss = () => {
-        console.log("YOU FAILED!")
-       
+        console.log("YOU FAILED!");
+        for(let i = 0; i<graph.discoveredBombs; i++){}
     }
 
-    let first  = 0;
-    this.nextMove= ()=> {
-        first++;
-        if(first==1){
-            console.log(1)
-            return String(1)
-
-        }
-        else{
-
+    function nextMove(){
+    
         
 
         let listy = [];
         for(let i = 0; i < 81; i++){
             let x = 1;
-            listy[i] = this.board.solverBombCount/this.squareCount;
+            listy[i] = .99;
             let unsweepedandnotflagged = 0;
-            for(let p = 0; p < this.board[i].adjMines.length; p++){
-                if(!this.board[i].adjMines[p].sweeped && this.board[i].adjBombCount != 0 && this.board[i].sweeped){
+            for(let p = 0; p < this.board[i].AdjMines.length; p++){
+                if(!this.board[i].adjMines[p].sweeped){
                     unsweepedandnotflagged++;
                 }
 
@@ -131,32 +119,27 @@ function Board(){
     
     
             }
-            if(unsweepedandnotflagged==this.board[i].adjBombCount&& this.board[i].adjBombCount != 0){
+            if(unsweepedandnotflagged==this.board[i].adjBombCount){
 
                 console.log("There is a bombs all around the squares of " + (i+1));
-                return "There is bombs all around the square of" + (i+1)
                 break;
 
             }
-            if(unsweepedandnotflagged>0){
-               
-                listy[i] = (this.board[i].adjBombCount / unsweepedandnotflagged)
-            }
-            
+    
+            listy[i] = (this.mineCount / unsweepedandnotflagged)
     
     
     
     
     
         }
-        console.log(min(listy));
-        return String(listy.indexOf(min(listy))+1)
+        console.log(listy.indexOf(min(listy))+1)
+    
     
     
     
     
     }
-}
 
     
 }

@@ -181,7 +181,7 @@ function mousePressed(){
 }
 
 function preload(){
-    mineAsset = loadImage('./assets./minesweeper-free-mine-sweeper-mono-android-game-png-favpng-71eWcNDpe4Gys8amaQKTYUaAx.png')
+    mineAsset = loadImage('./assets/minesweeper-free-mine-sweeper-mono-android-game-png-favpng-71eWcNDpe4Gys8amaQKTYUaAx.png')
 }
 
 

@@ -98,10 +98,14 @@ function Board(){
 }
     this.loss = () => {
         console.log("YOU FAILED!");
-        for(let i = 0; i<graph.discoveredBombs; i++){}
+        for(let i = 0; i<81; i++){
+            if(this.board[i].isBomb){
+                graph.discoveredBombs.push(this.board[i])
+            }
+        }
     }
 
-    function nextMove(){
+    this.nextMove = ()=>{
     
         
 
@@ -110,7 +114,7 @@ function Board(){
             let x = 1;
             listy[i] = .99;
             let unsweepedandnotflagged = 0;
-            for(let p = 0; p < this.board[i].AdjMines.length; p++){
+            for(let p = 0; p < this.board[i].adjMines.length; p++){
                 if(!this.board[i].adjMines[p].sweeped){
                     unsweepedandnotflagged++;
                 }

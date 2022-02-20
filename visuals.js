@@ -73,12 +73,18 @@ function Graph() {
             let square = this.flaggedSquares[i];
             this.drawFlag(square.indX, square.indY);
         }
+        this.drawBombs();
     }
     
     this.drawBombs = () =>{
-        for(let i = 0; i<this.discoveredBombArray; i++){
-            let b = this.discoveredBombArray[i]
-            image(mineAsset, this.margin + b.indX * this.squareWidth, this.margin+b.indY * this.squareWidth);
+        for(let i = 0; i<this.discoveredBombs.length; i++){
+            
+            let b = this.discoveredBombs[i]
+            fill(255,0,0);
+            stroke(92, 4, 4)
+            
+            rect(this.margin + b.indX * this.squareWidth, this.margin + b.indY * this.squareWidth, this.squareWidth, this.squareWidth, 5);
+            image(mineAsset, this.margin + b.indX * this.squareWidth - 15, this.margin+b.indY * this.squareWidth, this.squareWidth+30, this.squareWidth);
         }
     }
     this.mouseOnMine = (square) => {

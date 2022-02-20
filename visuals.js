@@ -13,6 +13,7 @@ function setup(){
 function draw() {
     background(192,192,192);
     graph.draw();
+    boardy.win();
 
 }
 
@@ -146,11 +147,13 @@ function Graph() {
         this.board = boardy.getBoardArray();
     }
     this.clearedSquaresUpdate = () =>{
+        let b = []
         for(i = 0; i<81; i++){
             if(this.board[i].sweeped){
-                this.clearedSquares.push(this.board[i]);
+                b.push(this.board[i]);
             }
         }
+        this.clearedSquares = b;
     }
     this.flaggedSquaresUpdate = () => {
         flaggy = []

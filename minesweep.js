@@ -1,4 +1,6 @@
 
+
+let haveWon = false;
 function Mines(index, bomb){
     this.indX = index%9;
     this.indY = Math.trunc(index/9);
@@ -104,7 +106,14 @@ function Board(){
             }
         }
     }
-
+    this.win = () =>{
+        if(graph.clearedSquares.length == 71 && !haveWon){
+            alert("WINNER WINNER CHICKEN DINNER")
+            haveWon = true;
+        }
+        console.log(graph.clearedSquares.length)
+        
+    }
     this.nextMove = ()=>{
     
         

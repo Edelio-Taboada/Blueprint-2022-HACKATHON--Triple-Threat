@@ -41,10 +41,12 @@ function Board(){
     this.mineCount = 10;
     this.squareCount = 81;
     this.unsweepedsquare = 81;
+    this.solverBombCount =10;
     this.populateBoard = ()=>{
         this.mineCount = 10;
         this.squareCount = 81;
         for(let i = 0; i<81; i++){
+
 
             let bomby = getRandomInt(this.squareCount) < this.mineCount;
             if(bomby) {
@@ -89,6 +91,9 @@ function Board(){
     this.flagSquare = ()=>{
         for(let i = 0; i<81; i++){
             if(graph.mouseOnMine(this.board[i]) && !this.board[i].sweeped){
+                this.board[i].flagged = true;
+                this.board.solverBombCount--;
+                
                 this.board[i].flagged = !this.board[i].flagged;
             }
     }
@@ -97,19 +102,28 @@ function Board(){
 }
     this.loss = () => {
         console.log("YOU FAILED!")
+       
     }
 
-    function nextMove(){
-    
+    let first  = 0;
+    this.nextMove= ()=> {
+        first++;
+        if(first==1){
+            console.log(1)
+            return String(1)
+
+        }
+        else{
+
         
 
         let listy = [];
         for(let i = 0; i < 81; i++){
             let x = 1;
-            listy[i] = .99;
+            listy[i] = this.board.solverBombCount/this.squareCount;
             let unsweepedandnotflagged = 0;
-            for(let p = 0; p < this.board[i].AdjMines.length; p++){
-                if(!this.board[i].adjMines[p].sweeped){
+            for(let p = 0; p < this.board[i].adjMines.length; p++){
+                if(!this.board[i].adjMines[p].sweeped && this.board[i].adjBombCount != 0 && this.board[i].sweeped){
                     unsweepedandnotflagged++;
                 }
 
@@ -117,27 +131,32 @@ function Board(){
     
     
             }
-            if(unsweepedandnotflagged==this.board[i].adjBombCount){
+            if(unsweepedandnotflagged==this.board[i].adjBombCount&& this.board[i].adjBombCount != 0){
 
                 console.log("There is a bombs all around the squares of " + (i+1));
+                return "There is bombs all around the square of" + (i+1)
                 break;
 
             }
-    
-            listy[i] = (this.mineCount / unsweepedandnotflagged)
+            if(unsweepedandnotflagged>0){
+               
+                listy[i] = (this.board[i].adjBombCount / unsweepedandnotflagged)
+            }
+            
     
     
     
     
     
         }
-        console.log(listy.indexOf(min(listy))+1)
-    
+        console.log(min(listy));
+        return String(listy.indexOf(min(listy))+1)
     
     
     
     
     }
+}
 
     
 }

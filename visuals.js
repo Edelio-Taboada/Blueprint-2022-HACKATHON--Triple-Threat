@@ -1,9 +1,13 @@
 
 let graph;
+let boardy;
 function setup(){
     createCanvas(600, 600);
     graph = new Graph();
+    boardy = new Board();
+    boardy.populateBoard();
     graph.populateBoard();
+    console.log(graph.board);
 }
 function draw() {
     background(192,192,192);
@@ -13,6 +17,8 @@ function draw() {
 
 function Graph() {
     this.board = [];
+    this.clearedSquares = [];
+    this.flaggedSquares = [];
     this.margin = 20;
     this.squareWidth = (600-this.margin*2)/9
     this.draw = ()=> {
@@ -47,6 +53,22 @@ function Graph() {
             line(this.margin + this.squareWidth * i, this.margin, this.margin + this.squareWidth * i, 600-this.margin);
         }
 
+        //draw the sweeped squares
+        fill(169, 169, 169)
+        for(let i = 0; i<this.clearedSquares.length; i++){
+            let mine = this.clearedSquares[i];
+            
+            rect(this.margin + mine.indX * this.squareWidth,
+                this.margin + mine.indY * this.squareWidth,
+                this.squareWidth,
+                this.squareWidth
+                )
+        }
+        //draw flags
+        for(let i = 0; i<this.flaggedSquares.length; i++){
+            let square = this.flaggedSquares[i];
+            this.drawFlag(square.indX, square.indY);
+        }
     }
     this.mouseOnMine = (square) => {
         let bombInd = -1;
@@ -66,10 +88,50 @@ function Graph() {
                 return true;
             }
     }
-
+    this.drawFlag = (x, y)=>{
+        fill(0);
+        rect(this.margin + x * this.squareWidth + this.squareWidth/2 - 4,
+            this.margin + y * this.squareWidth + this.squareWidth/3,
+            8,
+            this.squareWidth*2/3)
+        fill(255,0,0);
+        triangle(this.margin + x * this.squareWidth + this.squareWidth/4,
+             this.margin + y * this.squareWidth + this.squareWidth/2,
+             this.margin + x * this.squareWidth + this.squareWidth/2,
+             this.margin + y * this.squareWidth + this.squareWidth/4,
+             this.margin + x * this.squareWidth + this.squareWidth/2,
+             this.margin + y * this.squareWidth + this.squareWidth/2)
+        
+    }
     this.populateBoard = ()=>{
-        for(let i = 0; i<81; i++){
-            this.board[i] = new Mines(i);
+        this.board = boardy.getBoardArray();
+    }
+    this.clearedSquaresUpdate = () =>{
+        for(i = 0; i<81; i++){
+            if(this.board[i].sweeped){
+                this.clearedSquares.push(this.board[i]);
+            }
+        }
+    }
+    this.flaggedSquaresUpdate = () => {
+        for(i = 0; i<81; i++){
+            if(this.board[i].flagged){
+                this.flaggedSquares.push(this.board[i]);
+            }
         }
     }
 }
+
+function mouseClicked() {
+    if(mouseButton == LEFT){
+        boardy.checkSquare();
+        graph.populateBoard();
+        graph.clearedSquaresUpdate();
+    }else{
+        graph.populateBoard();
+        graph.flaggedSquaresUpdate();
+        
+    }
+    
+}
+

@@ -1,4 +1,7 @@
 let x = 1;
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+
 function help(){
     let image = document.getElementById('social');
   

@@ -18,7 +18,7 @@ body {
 .button-container {
   position: absolute;
   display: flex;
-  margin-top: 720px;
+  margin-top: 730px;
   margin-bottom: 0px;
   border-radius: 100px;
   background-color: #9fd3c7;
@@ -53,18 +53,12 @@ body {
   text-align: center;
 }
 
-#social{
-  position:absolute;
+#social {
+  position: absolute;
   width: 350px;
-  height:350px;
-  border-radius:150px;
+  height: 350px;
+  border-radius: 150px;
   background-position: center;
   margin-top: 685px;
   margin-bottom: 0px;
-  
-
-
-
 }
-
-

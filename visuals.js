@@ -128,6 +128,7 @@ function mouseClicked() {
         graph.populateBoard();
         graph.clearedSquaresUpdate();
     }else{
+        console.log("RIGHT CLCIKED!")
         graph.populateBoard();
         graph.flaggedSquaresUpdate();
         

@@ -47,11 +47,12 @@ function Board(){
                 this.board[i].flagged = true;
             }
     }
+   
+
+}
     this.loss = () => {
         console.log("YOU FAILED!")
     }
-
-}
 }
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);

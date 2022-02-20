@@ -70,6 +70,8 @@ function Graph() {
             this.drawFlag(square.indX, square.indY);
         }
     }
+    
+
     this.mouseOnMine = (square) => {
         let bombInd = -1;
         for(let i = 0; i<81; i++){
@@ -135,4 +137,6 @@ function mouseClicked() {
     }
     
 }
+
+
 

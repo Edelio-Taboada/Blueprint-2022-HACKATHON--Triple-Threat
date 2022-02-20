@@ -91,18 +91,24 @@ function Graph() {
             }
     }
     this.drawFlag = (x, y)=>{
+        strokeWeight(0);
         fill(0);
-        rect(this.margin + x * this.squareWidth + this.squareWidth/2 - 4,
-            this.margin + y * this.squareWidth + this.squareWidth/3,
-            8,
-            this.squareWidth*2/3)
+        rect(this.margin + x * this.squareWidth + this.squareWidth/2 - 2,
+            this.margin + y * this.squareWidth + this.squareWidth *1.1/3,
+            6,
+            this.squareWidth*1/3+ 3)
+        rect(this.margin + x * this.squareWidth + this.squareWidth/4,
+            this.margin + y * this.squareWidth + this.squareWidth *1.1/3 + this.squareWidth*1/3 +2,
+            this.squareWidth*1/2,
+            4
+            )
         fill(255,0,0);
         triangle(this.margin + x * this.squareWidth + this.squareWidth/4,
-             this.margin + y * this.squareWidth + this.squareWidth/2,
-             this.margin + x * this.squareWidth + this.squareWidth/2,
-             this.margin + y * this.squareWidth + this.squareWidth/4,
-             this.margin + x * this.squareWidth + this.squareWidth/2,
-             this.margin + y * this.squareWidth + this.squareWidth/2)
+             this.margin + y * this.squareWidth + this.squareWidth/2  - 7.5,
+             this.margin + x * this.squareWidth + this.squareWidth/2 + 5,
+             this.margin + y * this.squareWidth + this.squareWidth/4 - 5,
+             this.margin + x * this.squareWidth + this.squareWidth/2 + 4,
+             this.margin + y * this.squareWidth + this.squareWidth* 3/4 -5)
         
     }
     this.populateBoard = ()=>{
@@ -129,14 +135,22 @@ function mouseClicked() {
         boardy.checkSquare();
         graph.populateBoard();
         graph.clearedSquaresUpdate();
-    }else{
+    }
+}
+
+function mousePressed(){
+    if(mouseButton == RIGHT){
         console.log("RIGHT CLCIKED!")
+        boardy.flagSquare();
         graph.populateBoard();
         graph.flaggedSquaresUpdate();
         
+        
     }
-    
 }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 995ac3a0f6ea9aec02049df41aaf9fd15e7bb7ab

@@ -4,10 +4,34 @@ function Mines(index, bomb){
     this.indY = Math.trunc(index/9);
     this.isBomb = bomb;
     this.adjMines = [];
+    this.adjBombCount = -1;
     this.sweeped = false;
     this.flagged = false;
     this.setAdjMines = () =>{
-        this.sweeped;
+        for(let i = 0; i<81; i++){
+            let cMine = boardy.board[i];
+            if(this.indX==cMine.indX || this.indX == cMine.indX + 1 || this.indX == cMine.indX - 1){
+                if(this.indY==cMine.indY || this.indY == cMine.indY + 1 || this.indY == cMine.indY - 1){
+                    if(!(this.indX == cMine.indX && this.indY == cMine.indY))
+                    this.adjMines.push(cMine);
+                }
+            }
+        }
+    }
+    this.setAdjBomb = () =>{
+        for(let i = 0; i<this.adjMines.length; i++){
+            if(this.adjMines[i].isBomb){
+                if(this.adjBombCount == -1){
+                    this.adjBombCount = 1;
+                }else{
+                    this.adjBombCount++;
+                }
+                
+            }
+        }
+        if(this.adjBombCount == -1){
+            this.adjBombCount = 0;
+        }
     }
 }
 function Board(){
@@ -22,16 +46,27 @@ function Board(){
         this.squareCount = 81;
         for(let i = 0; i<81; i++){
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 995ac3a0f6ea9aec02049df41aaf9fd15e7bb7ab
             let bomby = getRandomInt(this.squareCount) < this.mineCount;
             if(bomby) {
                 this.mineCount -=1;
             }
                 this.squareCount -= 1;
                 this.board[i] = new Mines(i, bomby);
+<<<<<<< HEAD
                 
 
             
 
+=======
+        }
+        for(let i = 0; i<81; i++){
+            this.board[i].setAdjMines();
+            this.board[i].setAdjBomb();
+>>>>>>> 995ac3a0f6ea9aec02049df41aaf9fd15e7bb7ab
         }
     }
     this.getBoardArray = ()=>{

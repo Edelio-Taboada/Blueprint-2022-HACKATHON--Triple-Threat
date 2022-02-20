@@ -148,9 +148,6 @@ function mousePressed(){
         
     }
 }
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 995ac3a0f6ea9aec02049df41aaf9fd15e7bb7ab

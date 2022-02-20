@@ -27,3 +27,9 @@ function help(){
     
 
 }
+function helpme(){
+    
+    document.getElementById("Answer").innerHTML = boardy.nextMove();
+    
+
+}

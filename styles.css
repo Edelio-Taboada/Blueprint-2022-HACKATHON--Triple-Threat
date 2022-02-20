@@ -20,9 +20,8 @@ body {
   display: flex;
   margin-top: 730px;
   margin-bottom: 0px;
-  border-radius: 100px;
-  background-color: #9fd3c7;
-  font-family: "Courier New", Courier, monospace;
+  
+  
 }
 
 .doThis {
@@ -36,13 +35,20 @@ body {
   color: black;
   cursor: pointer;
 }
+.helpbot:hover{
+  background-color: #385170;
+  border-radius: 100px;
+  color: black;
+  cursor: pointer;
+}
 
 .message {
   width: 600px;
   length: 800px;
   position: absolute;
   margin-top: 900px;
-  border: 1px;
+ 
+  border: 20px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
@@ -55,10 +61,22 @@ body {
 
 #social {
   position: absolute;
-  width: 350px;
+  width: 500px;
   height: 350px;
   border-radius: 150px;
   background-position: center;
   margin-top: 685px;
   margin-bottom: 0px;
+}
+
+.helpbot{
+  margin-left:25px;
+  background-color: #9fd3c7;
+  border-radius:100px;
+
+}
+.aboutcreators{
+  margin-left:25px;
+  border-radius:100px;
+  background-color: #9fd3c7;
 }

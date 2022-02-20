@@ -41,32 +41,27 @@ function Board(){
     this.mineCount = 10;
     this.squareCount = 81;
     this.unsweepedsquare = 81;
+    this.solverBombCount =10;
     this.populateBoard = ()=>{
         this.mineCount = 10;
         this.squareCount = 81;
         for(let i = 0; i<81; i++){
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 995ac3a0f6ea9aec02049df41aaf9fd15e7bb7ab
             let bomby = getRandomInt(this.squareCount) < this.mineCount;
             if(bomby) {
                 this.mineCount -=1;
             }
                 this.squareCount -= 1;
                 this.board[i] = new Mines(i, bomby);
-<<<<<<< HEAD
                 
 
             
 
-=======
         }
         for(let i = 0; i<81; i++){
             this.board[i].setAdjMines();
             this.board[i].setAdjBomb();
->>>>>>> 995ac3a0f6ea9aec02049df41aaf9fd15e7bb7ab
         }
     }
     this.getBoardArray = ()=>{
@@ -90,6 +85,8 @@ function Board(){
         for(let i = 0; i<81; i++){
             if(graph.mouseOnMine(this.board[i]) && !this.board[i].sweeped){
                 this.board[i].flagged = true;
+                this.board.solverBombCount--;
+                
             }
     }
    
@@ -97,20 +94,28 @@ function Board(){
 }
     this.loss = () => {
         console.log("YOU FAILED!")
-        this.reset()
+       
     }
 
-    function nextMove(){
-    
+    let first  = 0;
+    this.nextMove= ()=> {
+        first++;
+        if(first==1){
+            console.log(1)
+            return String(1)
+
+        }
+        else{
+
         
 
         let listy = [];
         for(let i = 0; i < 81; i++){
             let x = 1;
-            listy[i] = .99;
+            listy[i] = this.board.solverBombCount/this.squareCount;
             let unsweepedandnotflagged = 0;
-            for(let p = 0; p < this.board[i].AdjMines.length; p++){
-                if(!this.board[i].adjMines[p].sweeped){
+            for(let p = 0; p < this.board[i].adjMines.length; p++){
+                if(!this.board[i].adjMines[p].sweeped && this.board[i].adjBombCount != 0 && this.board[i].sweeped){
                     unsweepedandnotflagged++;
                 }
 
@@ -118,27 +123,32 @@ function Board(){
     
     
             }
-            if(unsweepedandnotflagged==this.board[i].adjBombCount){
+            if(unsweepedandnotflagged==this.board[i].adjBombCount&& this.board[i].adjBombCount != 0){
 
                 console.log("There is a bombs all around the squares of " + (i+1));
+                return "There is bombs all around the square of" + (i+1)
                 break;
 
             }
-    
-            listy[i] = (this.mineCount / unsweepedandnotflagged)
+            if(unsweepedandnotflagged>0){
+               
+                listy[i] = (this.board[i].adjBombCount / unsweepedandnotflagged)
+            }
+            
     
     
     
     
     
         }
-        console.log(listy.indexOf(min(listy))+1)
-    
+        console.log(min(listy));
+        return String(listy.indexOf(min(listy))+1)
     
     
     
     
     }
+}
 
     
 }

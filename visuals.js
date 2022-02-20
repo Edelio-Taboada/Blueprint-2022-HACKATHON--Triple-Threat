@@ -1,6 +1,7 @@
 
 let graph;
 let boardy;
+let mineAsset
 function setup(){
     createCanvas(600, 600);
     graph = new Graph();
@@ -19,6 +20,7 @@ function Graph() {
     this.board = [];
     this.clearedSquares = [];
     this.flaggedSquares = [];
+    this.discoveredBombs = [];
     this.margin = 20;
     this.squareWidth = (600-this.margin*2)/9
     this.draw = ()=> {
@@ -73,7 +75,12 @@ function Graph() {
         }
     }
     
-
+    this.drawBombs = () =>{
+        for(let i = 0; i<this.discoveredBombArray; i++){
+            let b = this.discoveredBombArray[i]
+            image(mineAsset, this.margin + b.indX * this.squareWidth, this.margin+b.indY * this.squareWidth);
+        }
+    }
     this.mouseOnMine = (square) => {
         let bombInd = -1;
         for(let i = 0; i<81; i++){
@@ -171,4 +178,8 @@ function mousePressed(){
         
         
     }
+}
+
+function preload(){
+    mineAsset = loadImage('./assets./minesweeper-free-mine-sweeper-mono-android-game-png-favpng-71eWcNDpe4Gys8amaQKTYUaAx.png')
 }

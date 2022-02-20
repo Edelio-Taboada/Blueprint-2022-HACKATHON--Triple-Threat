@@ -1,5 +1,5 @@
 
-
+let haveLost = false;
 let haveWon = false;
 function Mines(index, bomb){
     this.indX = index%9;
@@ -99,7 +99,11 @@ function Board(){
 
 }
     this.loss = () => {
-        console.log("YOU FAILED!");
+        
+        if(!haveLost){
+            alert("try again... loser");
+            haveLost = true;
+        }
         for(let i = 0; i<81; i++){
             if(this.board[i].isBomb){
                 graph.discoveredBombs.push(this.board[i])

@@ -167,15 +167,21 @@ function Graph() {
 }
 
 function mouseClicked() {
-    if(mouseButton == LEFT){
-        for(let i = 0; i<81; i++){
-            if(graph.mouseOnMine(boardy.board[i])){
-                boardy.checkSquare(boardy.board[i]);
+    if(haveLost){
+        location.reload();
+    }else{
+        if(mouseButton == LEFT){
+            for(let i = 0; i<81; i++){
+                if(graph.mouseOnMine(boardy.board[i])){
+                    boardy.checkSquare(boardy.board[i]);
+                }
             }
+            graph.populateBoard();
+            graph.clearedSquaresUpdate();
         }
-        graph.populateBoard();
-        graph.clearedSquaresUpdate();
     }
+
+
 }
 
 function mousePressed(){

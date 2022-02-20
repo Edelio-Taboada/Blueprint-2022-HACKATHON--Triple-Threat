@@ -101,17 +101,19 @@ function Board(){
         for(let i = 0; i<graph.discoveredBombs; i++){}
     }
 
-    function nextMove(){
+     this.nextMove =  () =>{
     
         
-
+        
         let listy = [];
         for(let i = 0; i < 81; i++){
             let x = 1;
-            listy[i] = .99;
+            
+            listy[i] = this.solverBombCount/81;
+            
             let unsweepedandnotflagged = 0;
-            for(let p = 0; p < this.board[i].AdjMines.length; p++){
-                if(!this.board[i].adjMines[p].sweeped){
+            for(let p = 0; p < this.board[i].adjMines.length; p++){
+                if(!this.board[i].adjMines[p].sweeped && this.board[i].sweeped && this.board[i].adjBombCount>0 && !this.board[i].flagged && !this.board[i].adjMines[p].flagged){
                     unsweepedandnotflagged++;
                 }
 
@@ -119,24 +121,33 @@ function Board(){
     
     
             }
-            if(unsweepedandnotflagged==this.board[i].adjBombCount){
+          
+            if(unsweepedandnotflagged==this.board[i].adjBombCount && this.board[i].adjBombCount>0 ){
 
                 console.log("There is a bombs all around the squares of " + (i+1));
+                return(i+1);
                 break;
 
             }
-    
-            listy[i] = (this.mineCount / unsweepedandnotflagged)
-    
+            if(this.board[i].adjBombCount>0 && !this.board[i].sweeped && unsweepedandnotflagged>0){
+
+            
+            listy[i] = (this.board[i].adjBombCount / unsweepedandnotflagged)
+            }
     
     
     
     
         }
-        console.log(listy.indexOf(min(listy))+1)
-    
-    
-    
+        if(listy[0] == listy[listy.length-1]){
+            return("ANY")
+        }
+
+
+        console.log(listy)
+        return (listy.indexOf(min(listy))+1)
+        
+        
     
     
     }

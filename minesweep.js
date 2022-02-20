@@ -67,26 +67,34 @@ function Board(){
     this.getBoardArray = ()=>{
         return this.board;
     }
-    this.checkSquare = ()=>{
-        for(let i = 0; i<81; i++){
-            if(graph.mouseOnMine(this.board[i])){
-                this.board[i].sweeped = true;
-                if(this.board[i].isBomb){
-                    this.loss();
-                    
+    this.checkSquare = (square)=>{
+        
+        square.sweeped = true;
+            if(square.isBomb){
+                this.loss();       
             }
             else{
                 this.unsweepedsquare--;
             }
+            if(square.adjBombCount == 0){
+                for(let i = 0; i<square.adjMines.length;i++){
+                    if(!square.adjMines[i].sweeped){
+                        this.checkSquare(square.adjMines[i]);
+                    }
+                    
+                }
+                
+            }
+            
         }
-    }
-    }
+    
     this.flagSquare = ()=>{
         for(let i = 0; i<81; i++){
             if(graph.mouseOnMine(this.board[i]) && !this.board[i].sweeped){
                 this.board[i].flagged = true;
                 this.board.solverBombCount--;
                 
+                this.board[i].flagged = !this.board[i].flagged;
             }
     }
    

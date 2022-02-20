@@ -63,7 +63,9 @@ function Graph() {
                 this.squareWidth,
                 this.squareWidth
                 )
+                
         }
+        this.drawAdjBombCounts();
         //draw flags
         for(let i = 0; i<this.flaggedSquares.length; i++){
             let square = this.flaggedSquares[i];
@@ -111,6 +113,22 @@ function Graph() {
              this.margin + y * this.squareWidth + this.squareWidth* 3/4 -5)
         
     }
+    this.drawAdjBombCounts = ()=>{
+        textAlign(CENTER);
+        textSize(32)
+        fill(26, 147, 111);
+        stroke(17, 75, 95);
+        for(let i = 0; i<this.clearedSquares.length; i++){
+            if(this.clearedSquares[i].adjBombCount != 0){
+            let square = this.clearedSquares[i];
+            
+            
+            text(square.adjBombCount,
+                 this.margin + square.indX * this.squareWidth + 0.5*this.squareWidth,
+                 this.margin + square.indY * this.squareWidth + 0.5*this.squareWidth + 10)
+            }
+        }
+    }
     this.populateBoard = ()=>{
         this.board = boardy.getBoardArray();
     }
@@ -122,17 +140,23 @@ function Graph() {
         }
     }
     this.flaggedSquaresUpdate = () => {
+        flaggy = []
         for(i = 0; i<81; i++){
             if(this.board[i].flagged){
-                this.flaggedSquares.push(this.board[i]);
+                flaggy.push(this.board[i]);
             }
         }
+        this.flaggedSquares = flaggy;
     }
 }
 
 function mouseClicked() {
     if(mouseButton == LEFT){
-        boardy.checkSquare();
+        for(let i = 0; i<81; i++){
+            if(graph.mouseOnMine(boardy.board[i])){
+                boardy.checkSquare(boardy.board[i]);
+            }
+        }
         graph.populateBoard();
         graph.clearedSquaresUpdate();
     }
@@ -148,9 +172,3 @@ function mousePressed(){
         
     }
 }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 995ac3a0f6ea9aec02049df41aaf9fd15e7bb7ab

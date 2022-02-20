@@ -6,7 +6,7 @@ body {
 body {
   margin: 0px;
   display: flex;
-
+  background-color: #1a936f;
   /* This centers our sketch horizontally. */
   justify-content: center;
   flex-direction: column;
@@ -21,7 +21,7 @@ body {
   margin-top: 730px;
   margin-bottom: 0px;
   border-radius: 100px;
-  background-color: #9fd3c7;
+  background-color: #88d498;
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -31,7 +31,7 @@ body {
 }
 
 .aboutcreators:hover {
-  background-color: #385170;
+  background-color: #c6dabf;
   border-radius: 100px;
   color: black;
   cursor: pointer;

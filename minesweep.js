@@ -46,50 +46,50 @@ function Board(){
         this.squareCount = 81;
         for(let i = 0; i<81; i++){
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 995ac3a0f6ea9aec02049df41aaf9fd15e7bb7ab
             let bomby = getRandomInt(this.squareCount) < this.mineCount;
             if(bomby) {
                 this.mineCount -=1;
             }
                 this.squareCount -= 1;
                 this.board[i] = new Mines(i, bomby);
-<<<<<<< HEAD
                 
 
             
 
-=======
         }
         for(let i = 0; i<81; i++){
             this.board[i].setAdjMines();
             this.board[i].setAdjBomb();
->>>>>>> 995ac3a0f6ea9aec02049df41aaf9fd15e7bb7ab
         }
     }
     this.getBoardArray = ()=>{
         return this.board;
     }
-    this.checkSquare = ()=>{
-        for(let i = 0; i<81; i++){
-            if(graph.mouseOnMine(this.board[i])){
-                this.board[i].sweeped = true;
-                if(this.board[i].isBomb){
-                    this.loss();
-                    
+    this.checkSquare = (square)=>{
+        
+        square.sweeped = true;
+            if(square.isBomb){
+                this.loss();       
             }
             else{
                 this.unsweepedsquare--;
             }
+            if(square.adjBombCount == 0){
+                for(let i = 0; i<square.adjMines.length;i++){
+                    if(!square.adjMines[i].sweeped){
+                        this.checkSquare(square.adjMines[i]);
+                    }
+                    
+                }
+                
+            }
+            
         }
-    }
-    }
+    
     this.flagSquare = ()=>{
         for(let i = 0; i<81; i++){
             if(graph.mouseOnMine(this.board[i]) && !this.board[i].sweeped){
-                this.board[i].flagged = true;
+                this.board[i].flagged = !this.board[i].flagged;
             }
     }
    
@@ -97,7 +97,6 @@ function Board(){
 }
     this.loss = () => {
         console.log("YOU FAILED!")
-        this.reset()
     }
 
     function nextMove(){

@@ -4,12 +4,61 @@ body {
 }
 
 body {
-  margin: 0;
+  margin: 0px;
   display: flex;
 
   /* This centers our sketch horizontally. */
   justify-content: center;
-
+  flex-direction:column;
   /* This centers our sketch vertically. */
   align-items: center;
+  font-family:'Courier New', Courier, monospace;
+
+}
+
+.button-container{
+position:absolute;
+display:flex;
+margin-top:780px;
+margin-bottom:0px;
+border-radius:100px;
+background-color: #9fd3c7; 
+font-family:'Courier New', Courier, monospace;
+
+}
+
+
+.doThis{
+  color:black;
+  font-size:40px;
+
+
+}
+
+.aboutcreators:hover{
+  background-color: #385170;
+  border-radius:100px;
+  color:black;
+  cursor:pointer;
+
+}
+
+.message{
+  width:600px;
+  length:800px;
+  position:absolute;
+  margin-top:900px;
+  border: 1px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+
+
+#doThis{
+
+  font-size:20px;
+  
+  text-align:center;
+  
 }
